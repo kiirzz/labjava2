@@ -20,15 +20,16 @@ public class index {
             cinema[i] = new Cinema();
             System.out.println("Put cinema " + i + 1 + " name, address, capacity, number of hall, number of format: ");
             cinema[i].setCinemaBasicInfo(sc.next(), sc.next(), sc.nextInt(), sc.nextInt(), sc.nextInt());
-
+            
             System.out.println("Put cinema " + i + 1 + " formats: ");
             for (int j = 0; j < cinema[i].getCinemaFormatNumber(); j++) {
-                cinema[i].getCinemaFormatArr() = new
+              //  cinema[i].getCinemaFormatArr() = new
                 cinema[i].setCinemaFormat(sc.next(), j);
             }
 
             for (int j = 0; j < cinema[i].getCinemaHallNumber(); j++) {
                 System.out.println("Put cinema " + i + 1 + " hall " + j + 1 + " length and width: ");
+                cinema[i].getCinemaHall()[j]=new Hall();
                 cinema[i].setCinemaHall(j, sc.nextInt(), sc.nextInt());
                 System.out.println("Put cinema " + i + 1 + " hall " + j + 1 + " price per place: ");
                 for (int k = 0; k < cinema[i].getCinemaHall(j).getLength(); k++) {

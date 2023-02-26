@@ -7,9 +7,9 @@ public class Cinema {
     private String cinemaAddress;
     private int cinemaCapacity;
     private int cinemaFormatNumber;
-    private String[] cinemaFormat = new String[cinemaFormatNumber];
+    private String[] cinemaFormat;
     private int cinemaHallNumber;
-    private Hall[] cinemaHall = new Hall[cinemaHallNumber];
+    private Hall[] cinemaHall;
 
     /**/
 
@@ -22,6 +22,12 @@ public class Cinema {
         this.cinemaCapacity = cinemaCapacity;
         this.cinemaHallNumber = cinemaHallNumber;
         this.cinemaFormatNumber = cinemaFormatNumber;
+        cinemaFormat = new String[cinemaFormatNumber];
+        cinemaHall = new Hall[cinemaHallNumber];
+    }
+
+    public Hall[] getCinemaHall() {
+        return cinemaHall;
     }
 
     public void setCinemaFormat(String format, int formatCount) {
