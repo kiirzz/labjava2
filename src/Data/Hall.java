@@ -9,6 +9,7 @@ public class Hall {
     public void setSize(int hallLength, int hallWidth) {
         this.hallLength = hallLength;
         this.hallWidth = hallWidth;
+        ticketPrice = new double[hallLength][hallWidth];
     }
 
     public void setPrice(int len, int wid, double price) {

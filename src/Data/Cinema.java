@@ -26,10 +26,6 @@ public class Cinema {
         cinemaHall = new Hall[cinemaHallNumber];
     }
 
-    public Hall[] getCinemaHall() {
-        return cinemaHall;
-    }
-
     public void setCinemaFormat(String format, int formatCount) {
         this.cinemaFormat[formatCount] = format;
     }
@@ -57,6 +53,6 @@ public class Cinema {
 
     public Hall getCinemaHall(int hallCount) { return cinemaHall[hallCount]; }
 
-    public String[] getCinemaFormatArr() { return cinemaFormat; }
+    public Hall[] getCinemaHall() { return cinemaHall; }
 
 }
