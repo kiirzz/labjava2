@@ -1,14 +1,18 @@
-package Data;
+package Models;
 
 public class Hall {
     private double[][] ticketPrice;
     private int hallLength;
     private int hallWidth;
+    private int hallSize;
+    private int hallID;
 
     /*setter*/
+
     public void setSize(int hallLength, int hallWidth) {
         this.hallLength = hallLength;
         this.hallWidth = hallWidth;
+        this.hallSize = hallLength * hallWidth;
         ticketPrice = new double[hallLength][hallWidth];
     }
 
@@ -18,12 +22,16 @@ public class Hall {
         }
     }
 
+    public void setPrice(double[][] price) {
+        this.ticketPrice = price;
+    }
+
+    public void setHallID(int id) { this.hallID = id; }
+
     /*getter*/
     public int getLength() { return hallLength; }
 
-    public int getWidth() {
-        return hallWidth;
-    }
+    public int getWidth() { return hallWidth; }
 
     public double getPrice(int len, int wid) {
         if (len < this.hallLength & wid < this.hallWidth) {
@@ -31,6 +39,10 @@ public class Hall {
         }
         return(-1);
     }
+
+    public int getHallID() { return hallID; }
+
+    public int getHallSize() { return hallSize; }
 
     /**/
 
