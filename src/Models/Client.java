@@ -1,44 +1,19 @@
 package Models;
 
-public class Client {
-    private int clientID;
-    private String clientName;
-    private String clientPhoneNumber;
-    private String clientMail;
+public class Client extends Admin {
     private double clientBudget;
-    private String clientPower;
 
     /*setter*/
-    public void setClientInfo(String clientName, String clientPhoneNumber, String clientMail, String power)
+    public Client(String id, String Name, String PhoneNumber, String Mail, String Password, double budget)
     {
-        this.clientName = clientName;
-        this.clientPhoneNumber = clientPhoneNumber;
-        this.clientMail = clientMail;
-        this.clientPower = power;
-        this.clientBudget = 0;
-    }
-
-    public void setClientID(int id) {
-        this.clientID = id;
+        super(id, Name, PhoneNumber, Mail, Password);
+        this.clientBudget = budget;
     }
 
     public void purchaseMoney(double budget) { this.clientBudget -= budget; }
 
     public void rechargeMoney(double budget) { this.clientBudget += budget; }
 
-    /*getter*/
-    public int getClientID() { return clientID; }
-
-    public String getClientName() { return clientName; }
-
-    public String getClientPhoneNumber() { return clientPhoneNumber; }
-
-    public String getClientMail() { return clientMail; }
-
     public Double getClientBudget() { return clientBudget; }
-
-    public String getClientPower() { return clientPower; }
-
-    /**/
 
 }

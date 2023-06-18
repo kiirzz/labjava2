@@ -1,0 +1,307 @@
+//        /*Cinema input*/
+//        System.out.print("Put number of Cinema: ");
+//        int cinemaNumber = sc.nextInt();
+//        Cinema[] cinema = new Cinema[cinemaNumber];
+//
+//        for (int i = 0; i < cinemaNumber; i++) {
+//            cinema[i] = new Cinema();                                                                                       // create new
+//            System.out.println("Put cinema " + i + 1 + " name, address, capacity, number of hall, number of format: ");
+//            cinema[i].setCinemaBasicInfo(sc.next(), sc.next(), sc.nextInt(), sc.nextInt(), sc.nextInt());
+//
+//            System.out.println("Put cinema " + i + 1 + " formats: ");
+//            for (int j = 0; j < cinema[i].getCinemaFormatNumber(); j++) {
+//                cinema[i].setCinemaFormat(sc.next(), j);
+//            }
+//
+//            for (int j = 0; j < cinema[i].getCinemaHallNumber(); j++) {
+//                System.out.println("Put cinema " + i + 1 + " hall " + j + 1 + " length and width: ");
+//                cinema[i].getCinemaHall()[j]=new Hall();                                                                    // create new
+//                cinema[i].setCinemaHall(j, sc.nextInt(), sc.nextInt());
+//                System.out.println("Put cinema " + i + 1 + " hall " + j + 1 + " price per place: ");
+//                for (int k = 0; k < cinema[i].getCinemaHall(j).getLength(); k++) {
+//                    for (int m = 0; m < cinema[i].getCinemaHall(j).getWidth(); m++) {
+//                        cinema[i].setCinemaPriceHall(j, k, m, sc.nextDouble());
+//                    }
+//                }
+//            }
+//        }
+
+//        /*Film input*/
+//        System.out.println("Put number of film: ");
+//        int filmNumber = sc.nextInt();
+//        Film[] film = new Film[filmNumber];
+//        for (int i = 0; i < filmNumber; i++) {
+//            film[i] = new Film();                                                                                           // create new
+//            System.out.println("Put film " + i + 1 + " name: ");
+//            film[i].setFilmTitle(sc.nextLine());
+//            System.out.println("Put film " + i + 1 + " release year, genre, format, number of duration: ");
+//            film[i].setFilmInfo(sc.nextInt(), sc.next(), sc.next(), sc.nextInt());
+//            film[i].setFilmTimeException(true);
+//            do {
+//                if (!film[i].getFilmTimeException()) { System.out.println("Wrong time! Pls put duration again!"); }
+//                System.out.println("Put film " + i + 1 + " duration (hour:minute): ");
+//                film[i].setFilmDuration(sc.nextLine());
+//            } while(!film[i].getFilmTimeException());
+//        }
+
+//        /*test*/
+//        System.out.println(cinema[0].getCinemaName());
+//        System.out.println(cinema[0].getCinemaCapacity());
+//        System.out.println(cinema[0].getCinemaAddress());
+//        for (int i = 0; i < cinema[0].getCinemaFormatNumber(); i++) {
+//            System.out.println(cinema[0].getCinemaFormat(i));
+//        }
+
+
+Outer1:
+while (true) {
+    System.out.println("Choose your options:");
+    System.out.println("1. Login:");
+    System.out.println("2. Sign up:");
+    System.out.println("3. Exit");
+    chooseNumber = scanner.nextInt();
+
+    switch (chooseNumber) {
+        case 1:
+            System.out.println("Enter your email:");
+            accTp = scanner.nextLine();
+            if (accounts.checkAccount(accTp)) {
+                check = true;
+                while (check) {
+                    System.out.println("1. Enter your password:");
+                    System.out.println("2. Back");
+                    chooseNumber = scanner.nextInt();
+                    if (chooseNumber == 1) {
+                        passTp = scanner.nextLine();
+                        if (accounts.comparePassword(accTp, passTp)) {
+                            check = false;
+                            System.out.println("Welcome back!");
+                        }
+                        else {
+                            System.out.println("Wrong password. Please try again.");
+                        }
+                    }
+                    else {
+                        check = false;
+                    }
+                }
+            } else {
+                System.out.println("Your account didn't exist.");
+                continue;
+            }
+            break;
+        case 2:
+            check = true;
+            while (check) {
+                System.out.println("Enter new user mail:");
+                accTp = scanner.nextLine();
+                check = false;
+                if (!accounts.checkAccount(accTp)) {
+                    System.out.println("Enter name, phone number:");
+                    text1 = scanner.nextLine();
+                    System.out.println("Enter phone number:");
+                    text2 = scanner.nextLine();
+                    clTemp.setClientInfo(text1, text2, accTp);
+                    System.out.println("Enter new user password:");
+                    passTp = scanner.nextLine();
+                    accounts.addNewAccount(clTemp, accTp, passTp);
+                    System.out.println("Welcome!");
+                }
+                else {
+                    System.out.println("This account has existed. Please try another!");
+                    System.out.println("1. Try another new account");
+                    System.out.println("2. Back");                                                                //out ra login sign up
+                    chooseNumber = scanner.nextInt();
+                    if (chooseNumber == 1) { check = true; }
+                    else { continue Outer1; }
+                }
+            }
+            break;
+        case 3:
+            break Outer1;
+        default:
+            System.out.println("Please choose right number!");
+            continue;
+    }
+    System.out.println("Hello");
+}
+
+HashMap<String, Integer> filmName = new HashMap<>();
+        HashMap<Integer, Hall> halls = new HashMap<>();
+
+        int cinemaNumber = 5;
+        Cinema[] cinemas = new Cinema[cinemaNumber];
+
+        String[] format = {"2D","3D"};                                                                                      //cinema 0
+        input.cinemaInput(cinemas, 0, "35mm", "Pokrovka", 3, 2, format);
+        double[][] price = { {1, 2, 1}, {1, 2, 1}, {1, 2, 1} };                                                             //hall 0
+        input.hallInput(cinemas, 0, 0, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 1
+        input.hallInput(cinemas, 0, 1, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 2
+        input.hallInput(cinemas, 0, 2, 3, 3, price);
+
+        format = new String[]{"2D","3D"};                                                                                   //cinema 1
+        input.cinemaInput(cinemas, 1, "Secret", "Volochayev", 3, 2, format);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 0
+        input.hallInput(cinemas, 1, 0, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 1
+        input.hallInput(cinemas, 1, 1, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 2
+        input.hallInput(cinemas, 1, 2, 3, 3, price);
+
+        format = new String[]{"2D","3D"};                                                                                   //cinema 2
+        input.cinemaInput(cinemas, 2, "GUM", "Tver", 3, 2, format);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 0
+        input.hallInput(cinemas, 2, 0, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 1
+        input.hallInput(cinemas, 2, 1, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 2
+        input.hallInput(cinemas, 2, 2, 3, 3, price);
+
+        format = new String[]{"2D","3D"};                                                                                   //cinema 3
+        input.cinemaInput(cinemas, 3, "Pioneer", "Kutuzov", 3, 2, format);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 0
+        input.hallInput(cinemas, 3, 0, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 1
+        input.hallInput(cinemas, 3, 1, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 2
+        input.hallInput(cinemas, 3, 2, 3, 3, price);
+
+        format = new String[]{"2D","3D"};                                                                                   //cinema 4
+        input.cinemaInput(cinemas, 4, "Illusion", "Tagan", 3, 2, format);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 0
+        input.hallInput(cinemas, 4, 0, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 1
+        input.hallInput(cinemas, 4, 1, 3, 3, price);
+        price = new double[][]{{1, 2, 1}, {1, 2, 1}, {1, 2, 1}};                                                            //hall 2
+        input.hallInput(cinemas, 4, 2, 3, 3, price);
+
+        int hallNumber = 0;
+        for (int i = 0; i < cinemaNumber; i++) {
+            hallNumber += cinemas[i].getCinemaCapacity();
+            for (int j = 0; j < cinemas[i].getCinemaCapacity(); j++) {
+                halls.put(cinemas[i].getCinemaHall()[j].getHallID(), cinemas[i].getCinemaHall()[j]);
+            }
+        }
+
+        int filmNumber = 10;
+        Film[] films = new Film[filmNumber];
+        input.filmInput(films,0,"Black Widow",2021,"Action","2D", 150);                    //film 0
+        filmName.put("Black Widow",0);
+        input.filmInput(films,1,"Doctor Strange",2016,"Action","2D", 150);                 //film 1
+        filmName.put("Doctor Strange",1);
+        input.filmInput(films,2,"Your name",2018,"Anime","3D",150);                        //film 2
+        filmName.put("Your name",2);
+        input.filmInput(films,3,"Dragon Balls",2000,"Anime","2D",150);                     //film 3
+        filmName.put("Dragon Balls",3);
+        input.filmInput(films,4,"Batman",2008,"Action","2D",150);                          //film 4
+        filmName.put("Batman",4);
+        input.filmInput(films,5,"Superman",2001,"Action","2D",150);                        //film 5
+        filmName.put("Superman",5);
+        input.filmInput(films,6,"Masha i medved",2001,"Cartoon","2D",150);                 //film 6
+        filmName.put("Masha i medved",6);
+        input.filmInput(films,7,"Nu pogodi",1969,"Cartoon","2D",150);                      //film 7
+        filmName.put("Nu pogodi",7);
+        input.filmInput(films,8,"Titanic",1997,"Romance","2D",150);                        //film 8
+        filmName.put("Titanic",8);
+        input.filmInput(films,9,"Lalaland",2016,"Romance","2D",150);                       //film 9
+        filmName.put("Lalaland",9);
+
+        int sessionNumber = 24;
+        Session[] sessions = new Session[sessionNumber];
+        input.sessionInput(sessions, 0, 0, 0, 0, 3, "12:00");                  //session 0
+        input.sessionInput(sessions, 1, 0, 0, 0, 3, "16:00");                  //session 1
+        input.sessionInput(sessions, 2, 0, 0, 0, 3, "22:00");                  //session 2
+        input.sessionInput(sessions, 3, 0, 0, 3, 2, "14:00");                  //session 3
+        input.sessionInput(sessions, 4, 0, 0, 3, 2, "18:00");                  //session 4
+        input.sessionInput(sessions, 5, 0, 1, 5, 3, "13:00");                  //session 5
+        input.sessionInput(sessions, 6, 0, 1, 5, 3, "15:30");                  //session 6
+        input.sessionInput(sessions, 7, 0, 1, 5, 3, "19:30");                  //session 7
+        input.sessionInput(sessions, 8, 0, 2, 0, 2, "08:30");                  //session 8
+        input.sessionInput(sessions, 9, 0, 2, 0, 2, "11:00");                  //session 9
+        input.sessionInput(sessions, 10, 0, 2, 8, 4, "13:00");                  //session 10
+        input.sessionInput(sessions, 11, 0, 2, 8, 4, "15:30");                  //session 11
+        input.sessionInput(sessions, 12, 0, 2, 8, 4, "18:00");                  //session 12
+        input.sessionInput(sessions, 13, 0, 2, 8, 4, "22:00");                  //session 13
+        input.sessionInput(sessions, 14, 1, 0, 1, 5, "12:00");                  //session 14
+        input.sessionInput(sessions, 15, 1, 0, 1, 5, "14:00");                  //session 15
+        input.sessionInput(sessions, 16, 1, 0, 1, 5, "16:00");                  //session 16
+        input.sessionInput(sessions, 17, 1, 0, 1, 5, "18:00");                  //session 17
+        input.sessionInput(sessions, 18, 1, 0, 1, 5, "22:00");                  //session 18
+        input.sessionInput(sessions, 19, 1, 1, 4, 5, "12:00");                  //session 19
+        input.sessionInput(sessions, 20, 1, 1, 4, 5, "14:00");                  //session 20
+        input.sessionInput(sessions, 21, 1, 1, 4, 5, "16:00");                  //session 21
+        input.sessionInput(sessions, 22, 1, 1, 4, 5, "18:00");                  //session 22
+        input.sessionInput(sessions, 23, 1, 1, 4, 5, "22:00");                  //session 23
+
+        Account account = new Account();
+        input.accountInput(account, input.clientInput("Minh", "79296706316", "minh@gmail.com",
+                        "admin"), "minh456");
+        input.accountInput(account, input.clientInput("Thien", "79296706316", "thien@gmail.com",
+                        "user"), "thien123");
+        input.accountInput(account, input.clientInput("Dang", "79296706316", "dang@gmail.com",
+                        "user"), "dangvu");
+        input.accountInput(account, input.clientInput("Hung", "79296706316", "hung@gmail.com",
+                        "user"), "hung111");
+
+        int ticketNumber = 0;
+        int cinTemp;
+        int hallTemp;
+        int filmTemp;
+        int hourTemp;
+        int minTemp;
+        int ticTemp = 0;
+
+//        for (int i = 0; i < sessionNumber; i++) {
+//            ticketNumber += cinemas[sessions[i].getSessionCinema()].getCinemaHallCapacity()[sessions[i].getSessionHall()];
+////            for (int j = 0; j < cinemas[sessions[i].getSessionCinema()].getCinemaHallCapacity()[sessions[i].getSessionHall()]; j++) {
+////                ticketNumber +=
+////            }
+//        }
+//        Ticket[] tickets = new Ticket[ticketNumber];
+//        for (int i = 0; i < sessionNumber; i++) {
+//            cinTemp = sessions[i].getSessionCinema();
+//            hallTemp = sessions[i].getSessionHall();
+//            filmTemp = sessions[i].getSessionFilmID();
+//            hourTemp = sessions[i].getSessionHour();
+//            minTemp = sessions[i].getSessionMinute();
+//            for (int j = 0; j < cinemas[cinTemp].getCinemaHall()[hallTemp].getLength(); j++) {
+//                for (int k = 0; k < cinemas[cinTemp].getCinemaHall()[hallTemp].getWidth(); k++) {
+//                    input.ticketInput(tickets, cinemas, ticTemp, i, cinTemp, hallTemp, filmTemp, hourTemp, minTemp,
+//                            films[filmTemp].getFilmHour(), films[filmTemp].getFilmMinute(), j, k);
+//                    ticTemp++;
+//                }
+//            }
+//        }
+
+// Account
+package Models;
+
+import Models.Client;
+
+import java.util.HashMap;
+
+public class Account {
+    private final HashMap<String, String> account = new HashMap<String, String>();
+    private final HashMap<String, Client> accClient = new HashMap<String, Client>();
+    private int accountNumber = 0;
+
+    public void addNewAccount(Client client, String pass) {
+        this.account.put(client.getClientMail(), pass);
+        this.accClient.put(client.getClientMail(), client);
+        client.setID(this.accountNumber);
+        this.accountNumber += 1;
+    }
+
+    public boolean checkAccount(String acc) { return this.account.containsKey(acc); }
+
+    public boolean comparePassword(String acc, String pass) {
+        if (this.account.containsKey(acc)) {
+            return this.account.get(acc).equals(pass);
+        }
+        return false;
+    }
+
+    public Client getClientThroughAcc(String acc) { return this.accClient.get(acc); }
+}

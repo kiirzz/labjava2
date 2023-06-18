@@ -6,17 +6,16 @@ public class Film {
     private String filmGenre;
     private String filmFormat;
     private int filmDuration;
-    private int filmID;
+    private String filmID;
     private int filmHour;
     private int filmMinute;
 
     /**/
 
     /*setter*/
-    public void setFilmTitle(String filmTitle) { this.filmTitle = filmTitle; }
-
-    public void setFilmInfo(int id, int filmYear, String filmGenre, String filmFormat, int filmDuration)
+    public void setFilmInfo(String id, String filmTitle, int filmYear, String filmGenre, String filmFormat, int filmDuration)
     {
+        this.filmTitle = filmTitle;
         this.filmYear = filmYear;
         this.filmGenre = filmGenre;
         this.filmFormat = filmFormat;
@@ -37,7 +36,7 @@ public class Film {
 
     public int getFilmDuration() { return filmDuration; }
 
-    public int getFilmID() { return filmID; }
+    public String getFilmID() { return filmID; }
 
     public int getFilmHour() { return filmHour; }
 

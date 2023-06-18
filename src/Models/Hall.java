@@ -5,11 +5,13 @@ public class Hall {
     private int hallLength;
     private int hallWidth;
     private int hallSize;
-    private int hallID;
+    private String hallID;
+    private int hallNO;
 
     /*setter*/
 
-    public void setSize(int hallLength, int hallWidth) {
+    public void setInfo(String hallID, int hallLength, int hallWidth) {
+        this.hallID = hallID;
         this.hallLength = hallLength;
         this.hallWidth = hallWidth;
         this.hallSize = hallLength * hallWidth;
@@ -26,7 +28,7 @@ public class Hall {
         this.ticketPrice = price;
     }
 
-    public void setHallID(int id) { this.hallID = id; }
+    public void addHallCinema(Cinema cinema) { this.hallNO = cinema.getCinemaCapacity() + 1; }
 
     /*getter*/
     public int getLength() { return hallLength; }
@@ -40,9 +42,12 @@ public class Hall {
         return(-1);
     }
 
-    public int getHallID() { return hallID; }
+    public String getHallID() { return hallID; }
 
     public int getHallSize() { return hallSize; }
+
+    public int getHallNO() { return hallNO; }
+
 
     /**/
 

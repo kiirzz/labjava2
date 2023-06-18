@@ -3,65 +3,68 @@ package Models;
 import Models.Cinema;
 import Models.Film;
 
+import java.util.ArrayList;
+
 public class Session {
-    private int sessionCinemaID;
-    private int sessionID;
-    private int sessionFilmID;
-    private int sessionHall;
+    private String sessionCinemaID;
+    private String sessionID;
+    private String sessionFilmID;
+    private String sessionHallID;
     private int sessionTimeNumber;
-    private int sessionHour;
-    private int sessionMinute;
-    private boolean sessionException;
+    private final ArrayList<Integer> sessionHour = new ArrayList<>();
+    private final ArrayList<Integer> sessionMinute = new ArrayList<>();
 
     /**/
-    private int toInt(String str) {
-        int num;
-        try {
-            num = Integer.parseInt(str);
-        }
-        catch (NumberFormatException ex) {
-            num = -1;
-        }
-        return(num);
-    }
+//    private int toInt(String str) {
+//        int num;
+//        try {
+//            num = Integer.parseInt(str);
+//        }
+//        catch (NumberFormatException ex) {
+//            num = -1;
+//        }
+//        return(num);
+//    }
 
     /*setter*/
-    public void setSessionBasicInfo(int id, int cinema, int hall, int film, int timeNumber)
+    public void setSessionBasicInfo(String id, String cinema, String hall, String film)
     {
         this.sessionID = id;
         this.sessionCinemaID = cinema;
-        this.sessionHall = hall;
+        this.sessionHallID = hall;
         this.sessionFilmID = film;
-        this.sessionTimeNumber = timeNumber;
+        this.sessionTimeNumber = 0;
     }
 
-    public void setSessionTime(String sessionTime) {
-        this.sessionException = sessionTime.length() == 5;
+    public void addSessionTime(String sessionTime) {
+        String[] data = sessionTime.split(":");
+        int hour = Integer.parseInt(data[0]);
+        int minute = Integer.parseInt(data[1]);
 
-        int hour = 0;
-        int minute = 0;
+        this.sessionHour.add(hour);
+        this.sessionMinute.add(minute);
+        this.sessionTimeNumber += 1;
+    }
 
-        hour = toInt(sessionTime.substring(0, 2));
-        minute = toInt(sessionTime.substring(3, 5));
-        if (hour != -1 & hour <= 23) { this.sessionHour = hour; } else { this.sessionException = false; }
-        if (minute != -1 & minute <= 59) { this.sessionMinute = minute; } else { this.sessionException = false; }
+    public void addSessionTime(int hour, int minute) {
+        this.sessionHour.add(hour);
+        this.sessionMinute.add(minute);
+        this.sessionTimeNumber += 1;
     }
 
     /*getter*/
-    public int getSessionID() { return sessionID; }
+    public String getSessionID() { return sessionID; }
 
-    public int getSessionCinema() { return sessionCinemaID; }
+    public String getSessionCinema() { return sessionCinemaID; }
 
-    public int getSessionHall() { return sessionHall; }
+    public String getSessionHall() { return sessionHallID; }
 
-    public int getSessionFilmID() { return sessionFilmID; }
+    public String getSessionFilmID() { return sessionFilmID; }
 
     public int getSessionTimeNumber() { return sessionTimeNumber; }
 
-    public int getSessionHour() { return sessionHour; }
+    public ArrayList<Integer> getSessionHour() { return sessionHour; }
 
-    public int getSessionMinute() { return sessionMinute; }
-
-    public boolean getSessionException() { return sessionException; }
+    public ArrayList<Integer> getSessionMinute() { return sessionMinute; }
 
 }

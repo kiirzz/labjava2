@@ -1,22 +1,22 @@
 package Models;
 
 public class Ticket {
-    private int ticketID;
-    private int ticketSessionID;
-    private int ticketCinemaID;
-    private int ticketHallID;
-    private int ticketFilmID;
+    private String ticketID;
+    private String ticketSessionID;
+    private String ticketCinemaID;
+    private String ticketHallID;
+    private String ticketFilmID;
+    private String ticketClientID;
     private int ticketStHour;
     private int ticketStMinute;
     private int ticketEndHour;
     private int ticketENdMinute;
-    private int ticketHallLength;
-    private int ticketHallWidth;
-    private int ticketClientID;
+    private int ticketHallRow;
+    private int ticketHallColumn;
     private double ticketPrice;
 
-    public void setTicketInfo(int id, int session, int cinema, int hall, int film, int stHour, int stMinute,
-                              int endHour, int endMinute, int len, int wid, double price)
+    public Ticket(String id, String session, String film, String cinema, String hall, int stHour, int stMinute,
+                              int endHour, int endMinute, int row, int col, double price, String client)
     {
         this.ticketID = id;
         this.ticketSessionID = session;
@@ -27,25 +27,29 @@ public class Ticket {
         this.ticketStMinute = stMinute;
         this.ticketEndHour = endHour;
         this.ticketENdMinute = endMinute;
-        this.ticketHallLength = len;
-        this.ticketHallWidth = wid;
+        this.ticketHallRow = row;
+        this.ticketHallColumn = col;
         this.ticketPrice = price;
-        this.ticketClientID = -1;
+        this.ticketClientID = client;
     }
 
-    public void buyTicket(int clientID) {
+    public void buyTicket(String clientID) {
         this.ticketClientID = clientID;
     }
 
-    public int getTicketID() { return ticketID; }
+    public void cancelTicket() {
+        this.ticketClientID = "0";
+    }
 
-    public int getTicketSessionID() { return ticketSessionID; }
+    public String getTicketID() { return ticketID; }
 
-    public int getTicketCinemaID() { return ticketCinemaID; }
+    public String getTicketSessionID() { return ticketSessionID; }
 
-    public int getTicketHallID() { return ticketHallID; }
+    public String getTicketCinemaID() { return ticketCinemaID; }
 
-    public int getTicketFilmID() { return ticketFilmID; }
+    public String getTicketHallID() { return ticketHallID; }
+
+    public String getTicketFilmID() { return ticketFilmID; }
 
     public int getTicketStHour() { return ticketStHour; }
 
@@ -55,11 +59,11 @@ public class Ticket {
 
     public int getTicketEndMinute() { return ticketENdMinute; }
 
-    public int getTicketHallLength() { return ticketHallLength; }
+    public int getTicketHallRow() { return ticketHallRow; }
 
-    public int getTicketHallWidth() { return ticketHallWidth; }
+    public int getTicketHallColumn() { return ticketHallColumn; }
 
-    public int getTicketClientID() { return ticketClientID; }
+    public String getTicketClientID() { return ticketClientID; }
 
     public double getTicketPrice() { return ticketPrice; }
 

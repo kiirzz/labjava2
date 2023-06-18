@@ -2,53 +2,51 @@ package Models;
 
 import Models.Hall;
 
+import java.util.ArrayList;
+
 public class Cinema {
+    private String cinemaID;
     private String cinemaName;
     private String cinemaAddress;
-    private int cinemaCapacity;
-    private int cinemaFormatNumber;
-    private String[] cinemaFormat;
-    private Hall[] cinemaHall;
-    private int[] cinemaHallCapacity;
+    private int cinemaCapacity = 0;
+    private int cinemaFormatNumber = 0;
+    private final ArrayList<String> cinemaFormat = new ArrayList<>();
+    private final ArrayList<Hall> cinemaHall = new ArrayList<>();
+    private final ArrayList<Integer> cinemaHallCapacity = new ArrayList<>();
 
     /**/
 
     /*setter*/
-    public void setCinemaBasicInfo(String cinemaName, String cinemaAddress, int cinemaCapacity, int cinemaFormatNumber)
+    public void setCinemaBasicInfo(String id, String cinemaName, String cinemaAddress)
     {
+        this.cinemaID = id;
         this.cinemaName = cinemaName;
         this.cinemaAddress = cinemaAddress;
-        this.cinemaCapacity = cinemaCapacity;
-        this.cinemaFormatNumber = cinemaFormatNumber;
-        cinemaFormat = new String[cinemaFormatNumber];
-        cinemaHall = new Hall[cinemaCapacity];
-        cinemaHallCapacity = new int[cinemaCapacity];
     }
 
-    public void setCinemaFormat(String format, int formatCount) {
-        this.cinemaFormat[formatCount] = format;
+    public void addCinemaFormat(String format) {
+        this.cinemaFormat.add(format);
+        this.cinemaFormatNumber += 1;
     }
 
-    public void setCinemaFormat(String[] format) {
-        this.cinemaFormat = format;
+//    public void setCinemaFormat(String[] format) {
+//        this.cinemaFormat = format;
+//    }
+
+    public void addCinemaHall(Hall hall) {
+        this.cinemaHall.add(hall);
+        this.cinemaHallCapacity.add(hall.getLength() * hall.getWidth());
+        this.cinemaCapacity += 1;
     }
 
-    public void setCinemaHall(int hallCount, int len, int wid) {
-        this.cinemaHall[hallCount].setSize(len, wid);
-        this.cinemaHall[hallCount].setHallID(hallCount);
-    }
-
-    public void setCinemaPriceHall(int hallCount, int len, int wid, double price) {
-        this.cinemaHall[hallCount].setPrice(len,wid,price);
-        cinemaHallCapacity[hallCount] = len * wid;
-    }
-
-    public void setCinemaPriceHall(int hallCount, double[][] price) {
-        this.cinemaHall[hallCount].setPrice(price);
-        cinemaHallCapacity[hallCount] = this.cinemaHall[hallCount].getWidth() * this.cinemaHall[hallCount].getLength();
-    }
+//    public void setCinemaPriceHall(int hallCount, double[][] price) {
+//        this.cinemaHall.get(hallCount).setPrice(price);
+//        cinemaHallCapacity.get(hallCount) = this.cinemaHall.get(hallCount).getWidth() * this.cinemaHall.get(hallCount).getLength();
+//    }
 
     /*getter*/
+    public String getCinemaID() { return cinemaID; }
+
     public String getCinemaName() { return cinemaName; }
 
     public int getCinemaCapacity() { return cinemaCapacity; }
@@ -57,10 +55,12 @@ public class Cinema {
 
     public int getCinemaFormatNumber() { return cinemaFormatNumber; }
 
-    public String getCinemaFormat(int formatCount) { return cinemaFormat[formatCount]; }
+    public String getCinemaFormat(int num) { return cinemaFormat.get(num); }
 
-    public Hall[] getCinemaHall() { return cinemaHall; }
+    public ArrayList<String> getCinemaFormat() { return cinemaFormat; }
 
-    public int[] getCinemaHallCapacity() { return cinemaHallCapacity; }
+    public ArrayList<Hall> getCinemaHall() { return cinemaHall; }
+
+    public ArrayList<Integer> getCinemaHallCapacity() { return cinemaHallCapacity; }
 
 }
